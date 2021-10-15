@@ -1,0 +1,32 @@
+{
+  "name": "offline-diagnostic-tool",
+  "version": "0.0.1",
+  "description": "Allows to find common issues in Pega Infinity Mobile Client Offline applications. Also allows to explore data available in Offline application.",
+  "main": "index.js",
+  "dependencies": {
+    "dns": "file:./src/mock/dns"
+  },
+  "devDependencies": {
+    "eslint": "^7.24.0",
+    "eslint-config-google": "^0.14.0",
+    "eslint-webpack-plugin": "^2.5.4",
+    "webpack": "^5.31.0",
+    "webpack-cli": "^4.6.0"
+  },
+  "scripts": {
+    "test": "my-test-command"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://git.pega.io/scm/mx/team-offline.git"
+  },
+  "keywords": [
+    "offline",
+    "diagnostic",
+    "tool",
+    "debug",
+    "PIMC"
+  ],
+  "author": "Pegasystems Inc.",
+  "license": "ISC"
+}
