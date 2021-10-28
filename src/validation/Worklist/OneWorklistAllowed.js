@@ -56,8 +56,8 @@ export class OneWorklistAllowed extends Validation {
         if (worklists.length > 1) {
             let list = worklists.map(row => row['siip'].pyKey).join(", ")
             this.addError("Application contains too many worklists",
-                `Offline applications can only have 1 worklist. There are ${list.length} worklists in this application: ${list}.\n\n`
-                + `Having more than 1 worklist causes packaging issues and makes it impossible to open some assignments. Please see https://community.pega.com/support/support-articles/no-offline-support-multiple-worklists`);
+                `Offline applications can only have 1 worklist. There are ${worklists.length} worklists in this application: ${list}.\n\n` +
+                `Having more than 1 worklist causes packaging issues and makes it impossible to open some assignments. Please see https://community.pega.com/support/support-articles/no-offline-support-multiple-worklists`);
         }
     }
 }
