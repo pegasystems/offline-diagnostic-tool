@@ -7,6 +7,11 @@ on:
     branches: [ master ]
 
   workflow_dispatch:
+    inputs:
+      version:
+        description: 'Release version. Empty for no-release builds'
+        required: false
+        type: string
 
 jobs:
   build:
@@ -24,3 +29,53 @@ jobs:
       run: |
         npm install
         npx webpack
+
+    - name: Upload artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: pega-offline-diagnostic-tool.js
+        path: dist/pega-offline-diagnostic-tool.js
+
+  release:
+    runs-on: ubuntu-20.04
+    needs: [ build ]
+    if: ${{ inputs.version != null }}
+    
+    steps:
+      - name: Download artifact
+        uses: actions/download-artifact@v2
+        with:
+          name: pega-offline-diagnostic-tool.js
+
+      - name: Create tag
+        uses: actions/github-script@v5
+        with:
+          script: |
+            github.rest.git.createRef({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              ref: 'refs/tags/${{ inputs.version }}',
+              sha: context.sha
+            })
+
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: test
+          release_name: Release ${{ inputs.version }}
+          draft: false
+          prerelease: false
+
+      - name: Upload Release Asset
+        id: upload-release-asset 
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./pega-offline-diagnostic-tool.js
+          asset_name: pega-offline-diagnostic-tool.js
+          asset_content_type: test/JS
