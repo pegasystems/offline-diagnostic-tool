@@ -1,13 +1,19 @@
+# **Pega Offline Diagnostic Tool** 
+
+This project is diagnostic tool that helps find, identify and investigate problems present in **Pega Offline** applications.
+
+
+
 # Usage
 
 `pega-offline-diagnostic-tool.js` needs to be pasted into JavaScipt console as is then available as `PegaOfflineDiagnosticTool` 
  
 Preparation:
-1. Open [Chrome inspector](chrome://inspect/#devices). If you don't see WebViews related to you app, :
+1. Open [Chrome inspector](chrome://inspect/#devices). If you don't see WebViews related to you app:
     * make sure that `adb` daemon/service is running (type `adb devices` in system console)
-    * make sure your offline app has `Enable debugging` option checked in Mobile Channel
+    * make sure your offline app has `Enable debugging` option checked in **Mobile Channel**
 1. Click `inspect` under `pzPMCHiddenPortalTemplate` to open DevTools window.
-1. Copy the content of `offline-diagnostic-tool/dist/pega-offline-diagnostic-tool.js` script
+1. Copy the content of `pega-offline-diagnostic-tool.js` from latest release. (See [list of releases](https://github.com/pegasystems/offline-diagnostic-tool/releases))
 1. Paste the script cotent info JavaScript console in DevTools window.
 1. **Clear JS console** (otherwise console.log messages may not appear or appear in unexpected place)
 
